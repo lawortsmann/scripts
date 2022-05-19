@@ -1,10 +1,9 @@
 [Unit]
 Description=Jupyter-Notebook Daemon
 
-/home/lawortsmann/miniconda/bin/jupyter-notebook --config /home/lawortsmann/notebook_config.py
 [Service]
 Type=simple
-ExecStart=/bin/bash -c "/home/lawortsmann/miniconda/bin/jupyter-notebook --config /home/lawortsmann/scripts/notebook_config.py"
+ExecStart=/bin/bash -c "/home/lawortsmann/miniforge3/bin/jupyter-notebook --config /home/lawortsmann/scripts/notebook_config.py"
 WorkingDirectory=/home/lawortsmann
 User=lawortsmann
 Group=lawortsmann
