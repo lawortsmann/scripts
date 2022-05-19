@@ -43,21 +43,13 @@ ${HOME}/miniforge3/bin/conda install -y \
   pandas \
   scipy \
   scikit-learn \
-  pytorch \
   xarray \
   netcdf4 \
   dask \
   matplotlib \
   plotly \
   dash \
-  flask \
-  flask-caching \
-  gunicorn \
   notebook \
-  pyarrow \
-  pyathena \
-  google-cloud-bigquery \
-  beautifulsoup4 \
   isort \
   black \
   flake8 \
@@ -75,6 +67,5 @@ ${HOME}/miniforge3/bin/python -c "import numpy; print(f'numpy version:   {numpy.
 ${HOME}/miniforge3/bin/python -c "import pandas; print(f'pandas version:  {pandas.__version__}')"
 ${HOME}/miniforge3/bin/python -c "import scipy; print(f'scipy version:   {scipy.__version__}')"
 ${HOME}/miniforge3/bin/python -c "import xarray; print(f'xarray version:  {xarray.__version__}')"
-${HOME}/miniforge3/bin/python -c "import torch; print(f'pytorch version: {torch.__version__}')"
 
 echo "success, please restart shell."
