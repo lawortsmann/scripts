@@ -1,7 +1,7 @@
 #! /bin/bash
 gcloud beta compute --project=lawortsmann instances create gamma \
    --zone=us-central1-a \
-   --machine-type=e2-standard-16 \
+   --machine-type=c2-standard-16 \
    --subnet=default \
    --network-tier=STANDARD \
    --no-restart-on-failure \

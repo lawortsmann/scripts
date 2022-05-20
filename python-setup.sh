@@ -60,6 +60,18 @@ ${HOME}/miniforge3/bin/conda update -y --all
 
 ${HOME}/miniforge3/bin/conda clean -y --all
 
+echo "setting up jupyter notebook server..."
+
+sudo cp ${HOME}/scripts/jupyter-notebook.service /etc/systemd/system/
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable jupyter-notebook.service
+
+sudo systemctl start jupyter-notebook.service
+
+sudo systemctl status jupyter-notebook
+
 echo ""
 
 ${HOME}/miniforge3/bin/python -V
