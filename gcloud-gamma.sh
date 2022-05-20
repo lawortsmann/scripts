@@ -1,6 +1,6 @@
 #! /bin/bash
 gcloud beta compute --project=lawortsmann instances create gamma \
-   --zone=us-central1-a \
+   --zone=us-central1-c \
    --machine-type=c2-standard-16 \
    --subnet=default \
    --network-tier=STANDARD \
@@ -11,10 +11,10 @@ gcloud beta compute --project=lawortsmann instances create gamma \
    --scopes=https://www.googleapis.com/auth/cloud-platform \
    --tags=http-server,https-server,jupyter-server \
    --image-project=debian-cloud \
-   --image-family=debian-10 \
+   --image-family=debian-11 \
    --metadata-from-file=startup-script=setup-script.sh \
    --boot-disk-size=256GB \
-   --boot-disk-type=pd-ssd \
+   --boot-disk-type=pd-balanced \
    --boot-disk-device-name=gamma \
    --no-shielded-secure-boot \
    --shielded-vtpm \
@@ -33,6 +33,6 @@ clear
 
 sleep 1
 
-gcloud compute ssh lawortsmann@gamma --zone=us-central1-a
+gcloud compute ssh lawortsmann@gamma --zone=us-central1-c
 
-# gcloud compute --project=lawortsmann instances delete gamma --zone=us-central1-a
+# gcloud compute --project=lawortsmann instances delete gamma --zone=us-central1-c
