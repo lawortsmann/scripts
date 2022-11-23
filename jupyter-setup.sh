@@ -13,8 +13,10 @@ c.NotebookApp.port = 8000
 c.NotebookApp.allow_remote_access = True
 c.NotebookApp.open_browser = False
 c.NotebookApp.quit_button = False
-# hashed password: lw12345
-c.NotebookApp.password = u'argon2:\$argon2id\$v=19\$m=10240,t=10,p=8\$1n7ptaIs2uLfMSrxHEEfdA\$QY2rR3wLxN4PZ+cLRrcokQ'
+# c.NotebookApp.certfile = u'/absolute/path/to/your/certificate/fullchain.pem'
+# c.NotebookApp.keyfile = u'/absolute/path/to/your/certificate/privkey.pem'
+# password
+c.NotebookApp.password = u'argon2:\$argon2id\$v=19\$m=10240,t=10,p=8\$4ui/nshB4gaO3KqpAgjHKg\$A09ef8gCMj9I2EKmOHLsdJecXTJjY2xAXOjNYxZWmGY'
 c.NotebookApp.allow_password_change = False
 # default locations
 c.NotebookApp.base_url = '/'
