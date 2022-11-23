@@ -1,13 +1,8 @@
-#
-#   Tear down and rebuild miniforge3
-#
-
 if [ "$(command -v conda)" ]
 then
   echo "removing existing conda installation..."
   CONDA_DIR=$(conda info --base)
-  conda deactivate
-  conda init --reverse
+  conda init --all --reverse
   rm -rf ${CONDA_DIR}
   rm -rf ${HOME}/.conda/
   rm -f ${HOME}/.condarc
@@ -15,30 +10,32 @@ then
   exit
 fi
 
-echo "downloading miniforge3..."
+echo "downloading miniconda3..."
 
-MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3"
+# DOWNLOAD_URL="https://repo.anaconda.com/miniconda/Miniconda3-latest"
+DOWNLOAD_URL="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3"
 
 if [ $(uname) = "Darwin" ]
 then
-  curl -fsSLo Miniforge3.sh "$MINIFORGE_URL-MacOSX-$(uname -m).sh"
+  wget -O miniconda3.sh "$DOWNLOAD_URL-MacOSX-$(uname -m).sh"
 else
-  wget -O Miniforge3.sh "$MINIFORGE_URL-$(uname)-$(uname -m).sh"
+  wget -O miniconda3.sh "$DOWNLOAD_URL-$(uname)-$(uname -m).sh"
 fi
 
 echo "installing conda..."
 
-bash Miniforge3.sh -b -f -p ${HOME}/miniforge3
-
-rm -f Miniforge3.sh
+bash miniconda3.sh -b -f -p "${HOME}/conda"
 
 echo "setting up conda..."
 
-${HOME}/miniforge3/bin/conda init
+source "${HOME}/conda/etc/profile.d/conda.sh"
+conda activate
+conda init --all
+conda update -y conda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 
-${HOME}/miniforge3/bin/conda install -y python=3.8
-
-${HOME}/miniforge3/bin/conda install -y \
+conda install -y \
   numpy \
   pandas \
   scipy \
@@ -56,28 +53,18 @@ ${HOME}/miniforge3/bin/conda install -y \
   mypy \
   pytest
 
-${HOME}/miniforge3/bin/conda update -y --all
+conda update -y --all
 
-${HOME}/miniforge3/bin/conda clean -y --all
+echo "cleaning up..."
 
-echo "setting up jupyter notebook server..."
+conda clean -y --all
+rm -f miniconda3.sh
 
-sudo cp ${HOME}/scripts/jupyter-notebook.service /etc/systemd/system/
+echo "testing..."
 
-sudo systemctl daemon-reload
-
-sudo systemctl enable jupyter-notebook.service
-
-sudo systemctl start jupyter-notebook.service
-
-sudo systemctl status jupyter-notebook
-
-echo ""
-
-${HOME}/miniforge3/bin/python -V
-${HOME}/miniforge3/bin/python -c "import numpy; print(f'numpy version:   {numpy.__version__}')"
-${HOME}/miniforge3/bin/python -c "import pandas; print(f'pandas version:  {pandas.__version__}')"
-${HOME}/miniforge3/bin/python -c "import scipy; print(f'scipy version:   {scipy.__version__}')"
-${HOME}/miniforge3/bin/python -c "import xarray; print(f'xarray version:  {xarray.__version__}')"
+python -V
+python -c "import numpy; print(f'numpy version: {numpy.__version__}')"
+python -c "import pandas; print(f'pandas version: {pandas.__version__}')"
+python -c "import scipy; print(f'scipy version: {scipy.__version__}')"
 
 echo "success, please restart shell."
