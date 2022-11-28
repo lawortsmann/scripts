@@ -43,10 +43,19 @@ conda install -y \
   xarray \
   netcdf4 \
   dask \
+  jax \
+  flax \
+  jaxopt \
+  optax \
   matplotlib \
   plotly \
   dash \
+  flask \
   notebook \
+  google-cloud-bigquery \
+  google-auth \
+  db-dtypes \
+  pytables \
   isort \
   black \
   flake8 \
